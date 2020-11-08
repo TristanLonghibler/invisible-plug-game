@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
-public class PlayerController : MonoBehaviour
+public class TriggerScript : MonoBehaviour
 {
     private Rigidbody rb;
-    public float speed = 5f;
     public Text winText;
 
     // Start is called before the first frame update
@@ -21,26 +19,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxis("Horizontal") * speed;
-        float v = Input.GetAxis("Vertical") * speed;
-
-        rb.velocity = new Vector3(h, v, 0.0f);
-
-        if(Input.GetKey(KeyCode.Space))
-        {
-            rb.AddForce(0, 0, 10f * speed);
-        }
-        else if(Input.GetKey(KeyCode.B))
-        {
-            rb.AddForce(0, 0, -10f * speed);
-        }
+        
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.CompareTag("Plug"))
         {
-             winText.text = "You Win!";
+            winText.text = "You Win!";
         }
     }
 }
