@@ -10,15 +10,14 @@ public class OutletPostiion : MonoBehaviour
     float y;
     float z;
     Vector3 pos;
-    GameObject rb;
+
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<GameObject>();
-        x = 17.54636f;
+        x = Random.Range(-25, 26);
         y = Random.Range(-25, 26);
-        z = Random.Range(-25, 26);
-        rb.transform.position = new Vector3(x, y, z);
+        z = 0.5395199f;
+        this.transform.position = new Vector3(x, y, z);
     }
 
     // Update is called once per frame
