@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Rigidbody rb;
-    public Button upButton, rightButton, leftButton, downButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton;
     public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
@@ -38,6 +38,11 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             rb.AddForce(0, 0, -10f * speed);
         }
+
+        if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
+        if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
+        if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);
+        if (downButton.IsPressed) rb.AddForce(0, -10f * speed, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,7 +72,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void onRightButtonPress()
     {
         Debug.Log("Right Button Pressed.");
-        while(buttonPressed) rb.velocity = new Vector3(0, 10f * speed, 0);
+        rb.velocity = new Vector3(0, 10f * speed, 0);
     }
 
     public void onLeftButtonPress()
