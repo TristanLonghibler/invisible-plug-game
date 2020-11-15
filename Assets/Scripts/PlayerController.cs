@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Rigidbody rb;
+    public PlayerButton upButton, rightButton, leftButton, downButton;
+    public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
 
@@ -35,6 +38,11 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(0, 0, -10f * speed);
         }
+
+        if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
+        if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
+        if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);
+        if (downButton.IsPressed) rb.AddForce(0, -10f * speed, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -43,5 +51,37 @@ public class PlayerController : MonoBehaviour
         {
              winText.text = "You Win!";
         }
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        Debug.Log("OnPointerDown function called.");
+        buttonPressed = true;
+    }
+ 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        buttonPressed = false;
+    }
+
+    public void onUpButtonPress()
+    {
+        if(buttonPressed) rb.transform.Translate(1f * speed, 0, 0);
+    }
+
+    public void onRightButtonPress()
+    {
+        Debug.Log("Right Button Pressed.");
+        rb.velocity = new Vector3(0, 10f * speed, 0);
+    }
+
+    public void onLeftButtonPress()
+    {
+        while(buttonPressed) rb.velocity = new Vector3(0, -1f * speed, 0);
+    }
+
+    public void onDownButtonPress()
+    {
+        while(buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
     }
 }
