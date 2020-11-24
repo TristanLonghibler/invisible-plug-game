@@ -5,41 +5,21 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
+
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Rigidbody rb;
-    public PlayerButton upButton, rightButton, leftButton, downButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
     public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
-    public Text loseText;
-    public float timer;
-    public int seconds;
-    public Text timerText;
-    public GameObject trigger;
-    public GameObject triggerd;
-    public bool didWin = false;
-    Camera mainCam;
-    public Camera leftCam;
-    public Camera rightCam;
-    public Button restartButton;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        trigger = GameObject.FindWithTag("Trigger");
-        triggerd = GameObject.FindWithTag("Trigger1");
-        mainCam = Camera.main;
-        mainCam.enabled = true;
-        leftCam.enabled = false;
-        rightCam.enabled = false;
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
         winText.text = "";
-        loseText.text = "";
-        timer = 60f; // Set timer for 60 seconds
-        timerText.text = timer.ToString();
-        restartButton.gameObject.SetActive(false); // Hide restart button at start
     }
 
     // Update is called once per frame
@@ -50,7 +30,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
         rb.velocity = new Vector3(h, v, 0.0f);
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(0, 0, 10f * speed);
         }
@@ -59,15 +39,8 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
             rb.AddForce(0, 0, -10f * speed);
         }
 
-        // Continue counting down until player wins or loses
-        if(didWin == false) gameTimer();
-
-        // Switch between the main, left, and right cameras
-        // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera
-        if(Input.GetKeyDown (KeyCode.Alpha1)) switchMainCamera();
-        else if(Input.GetKeyDown (KeyCode.Alpha2)) switchLeftCamera();
-        else if(Input.GetKeyDown (KeyCode.Alpha3)) switchRightCamera();
-
+        if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
+        if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
         if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
         if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
         if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);
@@ -76,17 +49,9 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Trigger"))
+        if(other.gameObject.CompareTag("Plug"))
         {
-            winText.text = "You Win!";
-            didWin = true;
-            restartButton.gameObject.SetActive(true); // Show button when game is over
-        }
-        else if(other.gameObject.CompareTag("Trigger1"))
-        {
-            winText.text = "You Win!";
-            didWin = true;
-            restartButton.gameObject.SetActive(true); // Show button when game is over
+             winText.text = "You Win!";
         }
     }
 
@@ -119,58 +84,18 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void onDownButtonPress()
     {
-        while(buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
+        while (buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
     }
 
-    public void gameTimer()
+    public void onCWButtonPress()
     {
-        // Timer runs until it either hits 0 or the player loses by touching a pickup
-        if(timer > 0)
-        {
-            timer -= Time.deltaTime;
-            seconds = (int)timer % 60;
-            seconds = seconds + 1;
-            timerText.text = seconds.ToString();
-        }
-        else
-        {
-            timerText.text = "0";
-            gameOver();
-        }
+        Debug.Log("CW Burron press.");
+        while (buttonPressed) rb.transform.Rotate(0, 0, 0.5f);
     }
 
-    public void gameOver()
+    public void onCCWButtonPress()
     {
-        loseText.text = "You Lose";
-        trigger.SetActive(false);
-        triggerd.SetActive(false);
-        restartButton.gameObject.SetActive(true); // Show button when game is over
-    }
-
-    // Switch to main camera
-    public void switchMainCamera(){
-        mainCam.enabled = true;
-        leftCam.enabled = false;
-        rightCam.enabled = false;
-    }
-
-    // Switch to left camera
-    public void switchLeftCamera(){
-        mainCam.enabled = false;
-        leftCam.enabled = true;
-        rightCam.enabled = false;
-    }
-
-    // Switch to right camera
-    public void switchRightCamera(){
-        mainCam.enabled = false;
-        leftCam.enabled = false;
-        rightCam.enabled = true;
-    }
-
-    // Resets game if player hits reset button
-    public void onRestartButtonPress()
-    {
-        SceneManager.LoadScene("SampleScene"); // Restart the game
+        Debug.Log("CCW Button Pressed.");
+        while (buttonPressed) rb.transform.Rotate(0, 0, -0.5f);
     }
 }
