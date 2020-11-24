@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Rigidbody rb;
-    public PlayerButton upButton, rightButton, leftButton, downButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
     public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
@@ -67,7 +67,9 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         if(Input.GetKeyDown (KeyCode.Alpha1)) switchMainCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha2)) switchLeftCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha3)) switchRightCamera();
-
+        
+        if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
+        if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
         if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
         if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
         if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);
@@ -120,6 +122,18 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     public void onDownButtonPress()
     {
         while(buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
+    }
+    
+        public void onCWButtonPress()
+    {
+        Debug.Log("CW Burron press.");
+        while (buttonPressed) rb.transform.Rotate(0, 0, 0.5f);
+    }
+
+    public void onCCWButtonPress()
+    {
+        Debug.Log("CCW Button Pressed.");
+        while (buttonPressed) rb.transform.Rotate(0, 0, -0.5f);
     }
 
     public void gameTimer()
