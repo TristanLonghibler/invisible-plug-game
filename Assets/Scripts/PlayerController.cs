@@ -39,25 +39,25 @@ public class PlayerController : MonoBehaviour
         winText.text = "";
         loseText.text = "";
 
-        // switch (Difficulty.currentDifficulty) {
-        //     case Difficulty.Difficulties.Easy:
-        //         timer = 60f;
-        //         timerText.text = timer.ToString();
-        //         break;
-        //     case Difficulty.Difficulties.Medium:
-        //         timer = 50f;
-        //         timerText.text = timer.ToString();
-        //         break;
-        //     case Difficulty.Difficulties.Hard:
-        //         timer = 40f;
-        //         timerText.text = timer.ToString();
-        //         break;
-        //     default:
-        //         Debug.Log("Default case");
-        //         break;
-        // }
-        timer = 60f; // Set timer for 60 seconds
-        timerText.text = timer.ToString();
+        switch (Difficulty.currentDifficulty) {
+            case Difficulty.Difficulties.Easy:
+                timer = 60f;
+                timerText.text = timer.ToString();
+                break;
+            case Difficulty.Difficulties.Medium:
+                timer = 50f;
+                timerText.text = timer.ToString();
+                break;
+            case Difficulty.Difficulties.Hard:
+                timer = 40f;
+                timerText.text = timer.ToString();
+                break;
+            default:
+                Debug.Log("Default case");
+                break;
+        }
+        // timer = 60f; // Set timer for 60 seconds
+        // timerText.text = timer.ToString();
         restartButton.gameObject.SetActive(false); // Hide restart button at start
     }
 
