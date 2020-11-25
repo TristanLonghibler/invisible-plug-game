@@ -139,17 +139,32 @@ namespace Photon.Pun
         /// <summary>Called in intervals by UnityEngine. Affected by Time.timeScale.</summary>
         protected void FixedUpdate()
         {
+            #if PUN_DISPATCH_IN_FIXEDUPDATE
             this.Dispatch();
+            #elif PUN_DISPATCH_IN_LATEUPDATE
+            // do not dispatch here
+            #else
+            if (Time.timeScale > PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate)
+            {
+                this.Dispatch();
+            }
+            #endif
         }
 
         /// <summary>Called in intervals by UnityEngine, after running the normal game code and physics.</summary>
         protected void LateUpdate()
         {
+            #if PUN_DISPATCH_IN_LATEUPDATE
+            this.Dispatch();
+            #elif PUN_DISPATCH_IN_FIXEDUPDATE
+            // do not dispatch here
+            #else
             // see MinimalTimeScaleToDispatchInFixedUpdate and FixedUpdate for explanation:
             if (Time.timeScale <= PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate)
             {
                 this.Dispatch();
             }
+            #endif
 
 
             int currentMsSinceStart = (int)(Time.realtimeSinceStartup * 1000); // avoiding Environment.TickCount, which could be negative on long-running platforms
@@ -203,7 +218,7 @@ namespace Photon.Pun
             bool doDispatch = true;
             while (PhotonNetwork.IsMessageQueueRunning && doDispatch)
             {
-                // DispatchIncomingCommands() returns true of it found any command to dispatch (event, result or state change)
+                // DispatchIncomingCommands() returns true of it dispatched any command (event, response or state change)
                 Profiler.BeginSample("DispatchIncomingCommands");
                 doDispatch = PhotonNetwork.NetworkingClient.LoadBalancingPeer.DispatchIncomingCommands();
                 Profiler.EndSample();
