@@ -48,7 +48,6 @@ public class MenuController : MonoBehaviourPunCallbacks
     // Starts game if player hits button
     public void onStartButtonPress()
     {
-<<<<<<< HEAD
         Connect();
     }
 
@@ -93,8 +92,5 @@ public class MenuController : MonoBehaviourPunCallbacks
     {
         Debug.Log("MENU OnJoinedRoom() called by PUN. Now this client is in a room.");
         SceneManager.LoadScene("Game");
-=======
-        SceneManager.LoadScene("SampleScene"); // Start the game
->>>>>>> parent of e0b71be... Merge pull request #8 from aghwvv/adam
     }
 }

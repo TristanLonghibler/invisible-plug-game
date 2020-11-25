@@ -20,13 +20,6 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         rb = GetComponent<Rigidbody>();
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
         winText.text = "";
-<<<<<<< HEAD
-=======
-        loseText.text = "";
-        timer = 60f; // Set timer for 60 seconds
-        timerText.text = timer.ToString();
-        restartButton.gameObject.SetActive(false); // Hide restart button at start
->>>>>>> parent of e0b71be... Merge pull request #8 from aghwvv/adam
     }
 
     // Update is called once per frame
