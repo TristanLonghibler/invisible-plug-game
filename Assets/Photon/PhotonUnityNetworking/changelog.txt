@@ -2,6 +2,23 @@
 PUN 2 Change Log
 Exit Games GmbH - www.photonengine.com - forum.photonengine.com
 
+
+v2.23 (17. November 2020)
+Changed: CustomTypes are now split into CustomTypes and CustomTypesUnity. The latter is part of the Realtime API and registers automatically for Unity projects (in LoadBalancingClient constructor). This only changes internals for PUN. The Player class is only a de/serializable type in PUN.
+Changed: DebugLog info in case an RPC was not found. Making it clear that RPCs should return null or an IEnumerator (if you enable RunRpcCoroutines).
+Changed: Creation of the locally used EventData instance. The Parameters are now readonly and non-null.
+Updated: Registration wizard to avoid multiple registration calls.
+Fixed: Callback registration updates when the owner changes (PhotonView.SetOwnerInternal()).
+Changed: PhotonServerSettings label for Appid of PUN. Was labelled as "Realtime" but there is a "PUN" type of appids which should be used.
+Changed: Various places in PUN to re-use boxed bytes (instead of causing boxing in those places).
+Added: Handing for compile defines PUN_DISPATCH_IN_FIXEDUPDATE and PUN_DISPATCH_IN_LATEUPDATE. It locks Dispatch calls to the respective monobehaviour methods (and timing). Use one or the other.
+Changed: Depending on PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate and the Time.timeScale, PUN will dispatch incoming messages in FixedUpdate or in LateUpdate. Before it potentially was running in both MonoBehaviour callbacks.
+Changed: Description of PhotonNetwork.MinimalTimeScaleToDispatchInFixedUpdate to reflect and explain the change above.
+Changed: Loading and creation of the PhotonServerSettings file. We got several reports of errors with this but could not properly reproduce them. Several safeguards were added and in worst case, you might end up with two PhotonServerSettings files (if you had an old one).
+Added: BestRegion now checks if the operation GetRegions was successful. If it returned an error, it skips pinging (and the client will get disconnected anyways).
+Updated: The Realtime API and Photon3Unity3d.dll (v4.1.4.6) with lots of improvements and changes. Check the respective changelogs.
+
+
 v2.22 (07. September 2020)
 Changed: Default observe option for PhotonView is Unreliable On Change.
 Fixed: PhotonView.Get wouldn't work if object was disabled. This fixes that.
@@ -26,7 +43,6 @@ Fixed: Supress a minor unused warning in SlotRacer.
 Fixed: When Player disconnects - only change the owner of that players created objects if AutoCleanup is false. Otherwise, do nothing as they are all about to get destroyed, and an OwnerChange to Master could break things for some users.
 Fixed: Duplicate call to StaticReset(). This also created the LoadBalancingClient two times and caused a callback registration to get lost. This fixes the reported problem with scene synchronization in 2019.4 and up.
 Changed: PhotonNetwork.LoadLevel() methods will skip loading, if PhotonHandler.AppQuits is true. This avoids a minor issue in the Editor when a script loads a scene in OnLeftRoom() while ending playmode.
-
 
 v2.20.2 (04. August 2020)
 Fixed: Destroy code that caused a "Ev Destroy Failed." error log.
