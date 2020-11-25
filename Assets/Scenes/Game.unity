@@ -3504,6 +3504,16 @@ MonoBehaviour:
   buttonPressed: 0
   speed: 5
   winText: {fileID: 1477825545}
+  loseText: {fileID: 955042855}
+  timer: 0
+  seconds: 0
+  timerText: {fileID: 1379003846}
+  trigger: {fileID: 911642942}
+  triggerd: {fileID: 86673851}
+  didWin: 0
+  leftCam: {fileID: 880523859}
+  rightCam: {fileID: 475036005}
+  restartButton: {fileID: 770154720}
 --- !u!54 &4047714051955190742
 Rigidbody:
   m_ObjectHideFlags: 0
