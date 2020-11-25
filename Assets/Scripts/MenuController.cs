@@ -20,6 +20,7 @@ public class MenuController : MonoBehaviour
     // Starts game if player hits button
     public void onStartButtonPress()
     {
+        Difficulty.currentDifficulty = Difficulty.Difficulties.Hard; //This line is for testing purposes only. In the real implementation, we would have different buttons to click, and clicking those buttons is what would set the difficulty.
         SceneManager.LoadScene("SampleScene"); // Start the game
     }
 }
