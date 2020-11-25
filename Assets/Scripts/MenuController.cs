@@ -91,6 +91,7 @@ public class MenuController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("MENU OnJoinedRoom() called by PUN. Now this client is in a room.");
+        Difficulty.currentDifficulty = Difficulty.Difficulties.Hard; //This line is for testing purposes only. In the real implementation, we would have different buttons to click, and clicking those buttons is what would set the difficulty.
         SceneManager.LoadScene("Game");
     }
 }
