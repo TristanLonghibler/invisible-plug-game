@@ -3246,8 +3246,8 @@ MonoBehaviour:
   speed: 5
   winText: {fileID: 1477825545}
   loseText: {fileID: 955042855}
-  timer: 0
-  seconds: 0
+  timer: 60
+  seconds: 60
   timerText: {fileID: 1379003846}
   trigger: {fileID: 911642942}
   triggerd: {fileID: 86673851}
