@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
             case Difficulty.Difficulties.Easy:
                 timer = 60f;
                 timerText.text = timer.ToString();
+                CWButton.SetEnabled(false);
+                CCWButton.SetEnabled(false);
                 break;
             case Difficulty.Difficulties.Medium:
                 timer = 50f;
