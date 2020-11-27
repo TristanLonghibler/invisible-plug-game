@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
         }
 
@@ -58,8 +59,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     void SetPlugPlayer()
     {
         // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
-        timerText.text = "000";
-        Debug.Log(timerText.text);
+        // timerText.text = test.Text.text;
+        // Debug.Log(timerText.text);
+
+        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        // timerText.text = Photon.Pun.UtilityScripts.CountdownTimer.Text.text;
             
         loseText.SetActive(false);
         winText.SetActive(false);

@@ -615,7 +615,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475036003}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &475036005
 Camera:
   m_ObjectHideFlags: 0
@@ -1277,7 +1277,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880523857}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &880523859
 Camera:
   m_ObjectHideFlags: 0
@@ -2313,7 +2313,7 @@ GameObject:
   - component: {fileID: 1379003845}
   - component: {fileID: 1379003847}
   - component: {fileID: 1379003846}
-  - component: {fileID: 1379003848}
+  - component: {fileID: 1379003849}
   m_Layer: 5
   m_Name: Timer Text
   m_TagString: Untagged
@@ -2381,7 +2381,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379003844}
   m_CullTransparentMesh: 0
---- !u!114 &1379003848
+--- !u!114 &1379003849
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2390,19 +2390,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1379003844}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Script: {fileID: 11500000, guid: ffc398cf76e6d458caf303b5fceea504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  observableSearch: 2
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents: []
-  viewIdField: 2
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
+  Countdown: 20
+  Text: {fileID: 1379003846}
 --- !u!1 &1477825544
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,7 +3045,7 @@ MonoBehaviour:
   leftCamera: {fileID: 880523857}
   rightCamera: {fileID: 475036003}
   mainCamera: {fileID: 963194225}
-  timerText: {fileID: 1379003846}
+  timerText: {fileID: 0}
 --- !u!1 &1998526018
 GameObject:
   m_ObjectHideFlags: 0
