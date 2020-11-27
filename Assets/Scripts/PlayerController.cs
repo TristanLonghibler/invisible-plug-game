@@ -32,12 +32,12 @@ public class PlayerController : MonoBehaviour
         trigger = GameObject.FindWithTag("Trigger");
         triggerd = GameObject.FindWithTag("Trigger1");
         mainCam = Camera.main;
-        // mainCam.enabled = true;
-        // leftCam.enabled = false;
-        // rightCam.enabled = false;
+        mainCam.enabled = true;
+        leftCam.enabled = false;
+        rightCam.enabled = false;
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
-        // winText.text = "";
-        // loseText.text = "";
+        winText.text = "";
+        loseText.text = "";
 
         switch (Difficulty.currentDifficulty) {
             case Difficulty.Difficulties.Easy:
