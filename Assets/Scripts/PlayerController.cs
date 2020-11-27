@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
         leftCam.enabled = false;
         rightCam.enabled = false;
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
-        winText.text = "";
-        loseText.text = "";
+        // winText.text = "";
+        // loseText.text = "";
 
         switch (Difficulty.currentDifficulty) {
             case Difficulty.Difficulties.Easy:
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
 
         // Continue counting down until player wins or loses
-        if(didWin == false) gameTimer();
+        // if(didWin == false) gameTimer();
 
         // Switch between the main, left, and right cameras
         // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera

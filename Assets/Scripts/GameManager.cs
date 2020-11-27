@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 using Photon.Pun;
 using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
@@ -28,6 +30,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject mainCamera;
 
+    [Tooltip("Timer Text")]
+    [SerializeField]
+    private Text timerText;
+
 
     void Start()
     {
@@ -51,6 +57,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetPlugPlayer()
     {
+        // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
+        timerText.text = "000";
+        Debug.Log(timerText.text);
+            
         loseText.SetActive(false);
         winText.SetActive(false);
         leftCamera.SetActive(false);
@@ -67,7 +77,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player other)
     {
-
+        // if (PhotonNetwork.IsMasterClient) {
+        //     Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
+        //     timerText = test.Text;
+        //     Debug.Log(timerText);
+        // }
     }
 
     public override void OnPlayerLeftRoom(Player other)
