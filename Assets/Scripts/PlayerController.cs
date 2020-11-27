@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
 
         switch (Difficulty.currentDifficulty) {
             case Difficulty.Difficulties.Easy:
-                // timer = 60f;
-                // timerText.text = timer.ToString();
+                timer = 60f;
+                timerText.text = timer.ToString();
                 CWButton.SetEnabled(false);
                 CCWButton.SetEnabled(false);
                 break;
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
 
         // Continue counting down until player wins or loses
-        // if(didWin == false) gameTimer();
+        if(didWin == false) gameTimer();
 
         // Switch between the main, left, and right cameras
         // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera

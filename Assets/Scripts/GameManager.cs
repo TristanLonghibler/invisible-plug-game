@@ -30,16 +30,16 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject mainCamera;
 
-    [Tooltip("Timer Text")]
-    [SerializeField]
-    private Text timerText;
+    // [Tooltip("Timer Text")]
+    // [SerializeField]
+    // private Text timerText;
 
 
     void Start()
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+            // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
         }
 
