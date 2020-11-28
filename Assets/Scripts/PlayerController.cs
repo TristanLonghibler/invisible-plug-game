@@ -39,25 +39,25 @@ public class PlayerController : MonoBehaviour
         winText.text = "";
         loseText.text = "";
 
-        switch (Difficulty.currentDifficulty) {
-            case Difficulty.Difficulties.Easy:
-                timer = 60f;
-                timerText.text = timer.ToString();
-                CWButton.SetEnabled(false);
-                CCWButton.SetEnabled(false);
-                break;
-            case Difficulty.Difficulties.Medium:
-                timer = 50f;
-                timerText.text = timer.ToString();
-                break;
-            case Difficulty.Difficulties.Hard:
-                timer = 40f;
-                timerText.text = timer.ToString();
-                break;
-            default:
-                Debug.Log("Default case");
-                break;
-        }
+        // switch (Difficulty.currentDifficulty) {
+        //     case Difficulty.Difficulties.Easy:
+        //         timer = 60f;
+        //         timerText.text = timer.ToString();
+        //         CWButton.SetEnabled(false);
+        //         CCWButton.SetEnabled(false);
+        //         break;
+        //     case Difficulty.Difficulties.Medium:
+        //         timer = 50f;
+        //         timerText.text = timer.ToString();
+        //         break;
+        //     case Difficulty.Difficulties.Hard:
+        //         timer = 40f;
+        //         timerText.text = timer.ToString();
+        //         break;
+        //     default:
+        //         Debug.Log("Default case");
+        //         break;
+        // }
         // timer = 60f; // Set timer for 60 seconds
         // timerText.text = timer.ToString();
         restartButton.gameObject.SetActive(false); // Hide restart button at start
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
 
         // Continue counting down until player wins or loses
-        if(didWin == false) gameTimer();
+        // if(didWin == false) gameTimer();
 
         // Switch between the main, left, and right cameras
         // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera

@@ -28,13 +28,41 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject mainCamera;
 
-    // [Tooltip("Timer Text")]
-    // [SerializeField]
-    // private Text timerText;
+    ExitGames.Client.Photon.Hashtable CustomValue;
+
+    [Tooltip("Timer Text")]
+    [SerializeField]
+    private GameObject timerText;
 
 
     void Start()
     {
+        Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        // CustomValue = new ExitGames.Client.Photon.Hashtable();
+        // double startTime = PhotonNetwork.Time;
+        switch (Difficulty.currentDifficulty) {
+            case Difficulty.Difficulties.Easy:
+                timer.Countdown = 60f;
+                
+                // timerText.text = timer.ToString();
+                // CWButton.SetEnabled(false);
+                // CCWButton.SetEnabled(false);
+                break;
+            case Difficulty.Difficulties.Medium:
+                timer.Countdown = 50f;
+                // timerText.text = timer.ToString();
+                break;
+            case Difficulty.Difficulties.Hard:
+                // timer = 40f;
+                // timerText.text = timer.ToString();
+                break;
+            default:
+                Debug.Log("Default case");
+                break;
+        }
+
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        
         if (PhotonNetwork.IsMasterClient)
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
