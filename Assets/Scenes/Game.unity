@@ -3046,6 +3046,12 @@ MonoBehaviour:
   rightCamera: {fileID: 475036003}
   mainCamera: {fileID: 963194225}
   timerText: {fileID: 1379003844}
+  leftButton: {fileID: 762432088}
+  rightButton: {fileID: 65391251}
+  upButton: {fileID: 1038661448}
+  downButton: {fileID: 1624258244}
+  CWButton: {fileID: 1886617820}
+  CCWButton: {fileID: 1066809555}
 --- !u!1 &1998526018
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,29 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject timerText;
 
+    [Tooltip("Left Button")]
+    [SerializeField]
+    private PlayerButton leftButton;
+
+    [Tooltip("Right Button")]
+    [SerializeField]
+    private GameObject rightButton;
+
+    [Tooltip("Up Button")]
+    [SerializeField]
+    private GameObject upButton;
+
+    [Tooltip("Down Button")]
+    [SerializeField]
+    private GameObject downButton;
+
+    [Tooltip("CWButton")]
+    [SerializeField]
+    private GameObject CWButton;
+
+    [Tooltip ("CCWButton")]
+    [SerializeField]
+    private GameObject CCWButton;
 
     void Start()
     {
@@ -45,15 +68,15 @@ public class GameManager : MonoBehaviourPunCallbacks
                 timer.Countdown = 60f;
                 
                 // timerText.text = timer.ToString();
-                // CWButton.SetEnabled(false);
-                // CCWButton.SetEnabled(false);
+                CWButton.SetActive(false);
+                CCWButton.SetActive(false);
                 break;
             case Difficulty.Difficulties.Medium:
                 timer.Countdown = 50f;
                 // timerText.text = timer.ToString();
                 break;
             case Difficulty.Difficulties.Hard:
-                // timer = 40f;
+                timer.Countdown = 40f;
                 // timerText.text = timer.ToString();
                 break;
             default:
@@ -62,7 +85,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
 
         Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
-        
+
         if (PhotonNetwork.IsMasterClient)
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
@@ -90,7 +113,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         // timerText.text = Photon.Pun.UtilityScripts.CountdownTimer.Text.text;
-            
+        
         loseText.SetActive(false);
         winText.SetActive(false);
         leftCamera.SetActive(false);
@@ -103,6 +126,13 @@ public class GameManager : MonoBehaviourPunCallbacks
         leftCamera.SetActive(true);
         rightCamera.SetActive(false);
         mainCamera.SetActive(false);
+
+        leftButton.SetEnabled(false);
+        rightButton.SetActive(false);
+        upButton.SetActive(false);
+        downButton.SetActive(false);
+        CWButton.SetActive(false);
+        CCWButton.SetActive(false);
     }
 
     public override void OnPlayerEnteredRoom(Player other)
