@@ -5,10 +5,11 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 
-public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+
+public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    public PlayerButton upButton, rightButton, leftButton, downButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
     public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
@@ -37,8 +38,28 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
         winText.text = "";
         loseText.text = "";
-        timer = 60f; // Set timer for 60 seconds
-        timerText.text = timer.ToString();
+
+        switch (Difficulty.currentDifficulty) {
+            case Difficulty.Difficulties.Easy:
+                timer = 60f;
+                timerText.text = timer.ToString();
+                CWButton.SetEnabled(false);
+                CCWButton.SetEnabled(false);
+                break;
+            case Difficulty.Difficulties.Medium:
+                timer = 50f;
+                timerText.text = timer.ToString();
+                break;
+            case Difficulty.Difficulties.Hard:
+                timer = 40f;
+                timerText.text = timer.ToString();
+                break;
+            default:
+                Debug.Log("Default case");
+                break;
+        }
+        // timer = 60f; // Set timer for 60 seconds
+        // timerText.text = timer.ToString();
         restartButton.gameObject.SetActive(false); // Hide restart button at start
     }
 
@@ -50,7 +71,7 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
         rb.velocity = new Vector3(h, v, 0.0f);
 
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             rb.AddForce(0, 0, 10f * speed);
         }
@@ -58,6 +79,9 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         {
             rb.AddForce(0, 0, -10f * speed);
         }
+
+        if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
+        if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
 
         // Continue counting down until player wins or loses
         if(didWin == false) gameTimer();
@@ -90,37 +114,49 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         }
     }
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        Debug.Log("OnPointerDown function called.");
-        buttonPressed = true;
-    }
+    // public void OnPointerDown(PointerEventData eventData)
+    // {
+    //     Debug.Log("OnPointerDown function called.");
+    //     buttonPressed = true;
+    // }
  
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        buttonPressed = false;
-    }
+    // public void OnPointerUp(PointerEventData eventData)
+    // {
+    //     buttonPressed = false;
+    // }
 
-    public void onUpButtonPress()
-    {
-        if(buttonPressed) rb.transform.Translate(1f * speed, 0, 0);
-    }
+    // public void onUpButtonPress()
+    // {
+    //     if(buttonPressed) rb.transform.Translate(1f * speed, 0, 0);
+    // }
 
-    public void onRightButtonPress()
-    {
-        Debug.Log("Right Button Pressed.");
-        rb.velocity = new Vector3(0, 10f * speed, 0);
-    }
+    // public void onRightButtonPress()
+    // {
+    //     Debug.Log("Right Button Pressed.");
+    //     rb.velocity = new Vector3(0, 10f * speed, 0);
+    // }
 
-    public void onLeftButtonPress()
-    {
-        while(buttonPressed) rb.velocity = new Vector3(0, -1f * speed, 0);
-    }
+    // public void onLeftButtonPress()
+    // {
+    //     while(buttonPressed) rb.velocity = new Vector3(0, -1f * speed, 0);
+    // }
 
-    public void onDownButtonPress()
-    {
-        while(buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
-    }
+    // public void onDownButtonPress()
+    // {
+    //     while (buttonPressed) rb.velocity = new Vector3(-1f * speed, 0, 0);
+    // }
+
+    // public void onCWButtonPress()
+    // {
+    //     Debug.Log("CW Burron press.");
+    //     while (buttonPressed) rb.transform.Rotate(0, 0, 0.5f);
+    // }
+
+    // public void onCCWButtonPress()
+    // {
+    //     Debug.Log("CCW Button Pressed.");
+    //     while (buttonPressed) rb.transform.Rotate(0, 0, -0.5f);
+    // }
 
     public void gameTimer()
     {
@@ -171,6 +207,6 @@ public class PlayerController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     // Resets game if player hits reset button
     public void onRestartButtonPress()
     {
-        SceneManager.LoadScene("SampleScene"); // Restart the game
+        SceneManager.LoadScene("Game"); // Restart the game
     }
 }

@@ -25,4 +25,8 @@ public class PlayerButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandle
     {
         IsPressed = false;
     }
+
+    public void SetEnabled(bool value) {
+        this.gameObject.SetActive(value);
+    }
 }
