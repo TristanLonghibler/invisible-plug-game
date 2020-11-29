@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetPlugPlayer()
     {
-        plugModel.GetComponent<PlugPlayerController>().enabled = false;
+        plugModel.GetComponent<ObserverController>().enabled = false;
         
         // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
         // timerText.text = test.Text.text;
@@ -147,6 +147,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetObserver()
     {
+        plugModel.GetComponent<PlugPlayerController>().enabled = false;
         // observerPlayer = new PlayerController();
         // PlayerButton left = leftButton.GetComponent<PlayerButton>();
         // PlayerButton right = rightButton.GetComponent<PlayerButton>();
