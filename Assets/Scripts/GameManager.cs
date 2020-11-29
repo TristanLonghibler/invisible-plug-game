@@ -110,13 +110,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     // Update is called once per frame
-    void Update() {
-        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
-            return;
-        }
+    // void Update() {
+    //     if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+    //         return;
+    //     }
 
 
-    }
+    // }
 
     public void LeaveRoom()
     {

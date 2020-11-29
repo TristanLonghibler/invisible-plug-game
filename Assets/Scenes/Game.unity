@@ -2273,6 +2273,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379003844}
   m_CullTransparentMesh: 0
+--- !u!114 &1379003848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1379003844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc398cf76e6d458caf303b5fceea504, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Countdown: 5
+  Text: {fileID: 1379003846}
 --- !u!1 &1459932304
 GameObject:
   m_ObjectHideFlags: 0
