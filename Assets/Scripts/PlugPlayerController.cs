@@ -13,12 +13,12 @@ public class PlugPlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         
-        upButton.enabled = true;
-        rightButton.enabled = true;
-        leftButton.enabled = true;
-        downButton.enabled = true;
-        CWButton.enabled = true;
-        CCWButton.enabled = true;
+        upButton.gameObject.SetActive(true);
+        rightButton.gameObject.SetActive(true);
+        leftButton.gameObject.SetActive(true);
+        downButton.gameObject.SetActive(true);
+        CWButton.gameObject.SetActive(true);
+        CCWButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
