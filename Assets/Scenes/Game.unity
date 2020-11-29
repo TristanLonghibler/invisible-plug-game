@@ -1095,7 +1095,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4047714051955190741}
+      - m_Target: {fileID: 0}
         m_MethodName: onRestartButtonPress
         m_Mode: 1
         m_Arguments:
@@ -3120,6 +3120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566bb6cc8ad142a41a0e6b147c6a9aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pvCache: {fileID: 0}
   loseText: {fileID: 955042853}
   winText: {fileID: 1477825544}
   leftCamera: {fileID: 880523857}
@@ -3796,7 +3797,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4047714051955190737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7aa9f885d8e1a494fa8a3566d52a9056, type: 3}
+  m_Script: {fileID: 11500000, guid: f8b1fe7674c8d96459dd5ccb21470859, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   upButton: {fileID: 1038661453}
@@ -3805,19 +3806,7 @@ MonoBehaviour:
   downButton: {fileID: 1624258249}
   CWButton: {fileID: 1886617822}
   CCWButton: {fileID: 1066809557}
-  buttonPressed: 0
   speed: 5
-  winText: {fileID: 1477825545}
-  loseText: {fileID: 955042855}
-  timer: 0
-  seconds: 0
-  timerText: {fileID: 0}
-  trigger: {fileID: 911642942}
-  triggerd: {fileID: 86673851}
-  didWin: 0
-  leftCam: {fileID: 880523859}
-  rightCam: {fileID: 475036005}
-  restartButton: {fileID: 770154720}
 --- !u!54 &4047714051955190742
 Rigidbody:
   m_ObjectHideFlags: 0
