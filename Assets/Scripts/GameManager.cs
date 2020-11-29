@@ -61,30 +61,32 @@ public class GameManager : MonoBehaviourPunCallbacks
     void Start()
     {
         Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        PlayerButton CW = CWButton.GetComponent<PlayerButton>();
+        PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
+        UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
         // CustomValue = new ExitGames.Client.Photon.Hashtable();
         // double startTime = PhotonNetwork.Time;
         switch (Difficulty.currentDifficulty) {
             case Difficulty.Difficulties.Easy:
                 timer.Countdown = 60f;
-                
-                // timerText.text = timer.ToString();
-                CWButton.SetActive(false);
-                CCWButton.SetActive(false);
+                timerUI.text = 60f.ToString();
+                CW.SetEnabled(false);
+                CCW.SetEnabled(false);
                 break;
             case Difficulty.Difficulties.Medium:
                 timer.Countdown = 50f;
-                // timerText.text = timer.ToString();
+                timerUI.text = 50f.ToString();
                 break;
             case Difficulty.Difficulties.Hard:
                 timer.Countdown = 40f;
-                // timerText.text = timer.ToString();
+                timerUI.text = 40f.ToString();
                 break;
             default:
                 Debug.Log("Default case");
                 break;
         }
 
-        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -127,17 +129,24 @@ public class GameManager : MonoBehaviourPunCallbacks
     void SetObserver()
     {
         PlayerButton left = leftButton.GetComponent<PlayerButton>();
+        PlayerButton right = rightButton.GetComponent<PlayerButton>();
+        PlayerButton up = upButton.GetComponent<PlayerButton>();
+        PlayerButton down = downButton.GetComponent<PlayerButton>();
+        PlayerButton CW = CWButton.GetComponent<PlayerButton>();
+        PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
 
         leftCamera.SetActive(true);
         rightCamera.SetActive(false);
         mainCamera.SetActive(false);
 
         left.SetEnabled(false);
-        rightButton.SetActive(false);
-        upButton.SetActive(false);
-        downButton.SetActive(false);
-        CWButton.SetActive(false);
-        CCWButton.SetActive(false);
+        right.SetEnabled(false);
+        up.SetEnabled(false);
+        down.SetEnabled(false);
+        CW.SetEnabled(false);
+        CCW.SetEnabled(false);
+
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
 
     public override void OnPlayerEnteredRoom(Player other)
