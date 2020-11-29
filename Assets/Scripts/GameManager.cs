@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [Tooltip("Left Button")]
     [SerializeField]
-    private PlayerButton leftButton;
+    private GameObject leftButton;
 
     [Tooltip("Right Button")]
     [SerializeField]
@@ -91,6 +91,9 @@ public class GameManager : MonoBehaviourPunCallbacks
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
         }
+        else {
+            SetObserver();
+        }
 
     }
 
@@ -123,11 +126,13 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetObserver()
     {
+        PlayerButton left = leftButton.GetComponent<PlayerButton>();
+
         leftCamera.SetActive(true);
         rightCamera.SetActive(false);
         mainCamera.SetActive(false);
 
-        leftButton.SetEnabled(false);
+        left.SetEnabled(false);
         rightButton.SetActive(false);
         upButton.SetActive(false);
         downButton.SetActive(false);
