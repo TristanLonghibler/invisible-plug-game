@@ -58,8 +58,13 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject CCWButton;
 
+    private Player plugPlayer;
+    private Player observerPlayer;
+    public static GameManager Instance;
+
     void Start()
     {
+        Instance = this;
         Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
         PlayerButton CW = CWButton.GetComponent<PlayerButton>();
         PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
@@ -105,6 +110,14 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
     // Update is called once per frame
+    void Update() {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
+
+
+    }
+
     public void LeaveRoom()
     {
         PhotonNetwork.Disconnect();
@@ -128,13 +141,14 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetObserver()
     {
+        observerPlayer = new PlayerController();
         PlayerButton left = leftButton.GetComponent<PlayerButton>();
         PlayerButton right = rightButton.GetComponent<PlayerButton>();
         PlayerButton up = upButton.GetComponent<PlayerButton>();
         PlayerButton down = downButton.GetComponent<PlayerButton>();
         PlayerButton CW = CWButton.GetComponent<PlayerButton>();
         PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
-
+        Debug.Log("SetObserver called.");
         leftCamera.SetActive(true);
         rightCamera.SetActive(false);
         mainCamera.SetActive(false);

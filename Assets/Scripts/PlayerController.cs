@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     private Rigidbody rb;
     public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
@@ -24,6 +25,8 @@ public class PlayerController : MonoBehaviour
     public Camera leftCam;
     public Camera rightCam;
     public Button restartButton;
+
+    private bool isPlugPlayer;
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +69,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
         float h = Input.GetAxis("Horizontal") * speed;
         float v = Input.GetAxis("Vertical") * speed;
 
