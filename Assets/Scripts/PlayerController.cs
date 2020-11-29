@@ -43,8 +43,8 @@ public class PlayerController : MonoBehaviour
             case Difficulty.Difficulties.Easy:
                 timer = 60f;
                 timerText.text = timer.ToString();
-                CWButton.SetEnabled(false);
-                CCWButton.SetEnabled(false);
+                CWButton.SetEnabled(true);
+                CCWButton.SetEnabled(true);
                 break;
             case Difficulty.Difficulties.Medium:
                 timer = 50f;
@@ -80,8 +80,14 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(0, 0, -10f * speed);
         }
 
-        if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
-        if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
+        if (CWButton.IsPressed)
+        {
+            rb.transform.Rotate(0, 0, 0.5f);
+        }
+        if (CCWButton.IsPressed)
+        {
+            rb.transform.Rotate(0, 0, -0.5f);
+        }
 
         // Continue counting down until player wins or loses
         if(didWin == false) gameTimer();
