@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetObserver()
     {
-        observerPlayer = new PlayerController();
+        // observerPlayer = new PlayerController();
         PlayerButton left = leftButton.GetComponent<PlayerButton>();
         PlayerButton right = rightButton.GetComponent<PlayerButton>();
         PlayerButton up = upButton.GetComponent<PlayerButton>();
