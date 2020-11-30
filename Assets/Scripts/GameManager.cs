@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static bool isOfflineMode = true;
     public static bool timerRunning = true;
+    private bool plugPlayerConnected = false;
+    private bool observerConnected = false;
 
     [Tooltip("Lose Text")]
     [SerializeField]
@@ -15,11 +17,19 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [Tooltip("Win Text")]
     [SerializeField]
-    private GameObject winText;
+    private Text winText;
 
     [Tooltip("Plug Model")]
     [SerializeField]
     private GameObject plugModel;
+
+    [Tooltip("Trigger")]
+    [SerializeField]
+    public GameObject trigger;
+
+    [Tooltip("Trigger1")]
+    [SerializeField]
+    public GameObject triggerd;
 
     // [Tooltip("Left Camera")]
     // [SerializeField]
@@ -130,13 +140,30 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Menu");
     }
 
-    public void onTimerEnd() {
-
-    }
     // Update is called once per frame
     void Update() {
         // Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-        
+        if (!plugPlayerConnected || !observerConnected) {
+            return;
+        }
+
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Trigger"))
+        {
+            winText.text = "You Win!";
+            // didWin = true;
+            // restartButton.gameObject.SetActive(true); // Show button when game is over
+        }
+        else if(other.gameObject.CompareTag("Trigger1"))
+        {
+            winText.text = "You Win!";
+            // didWin = true;
+            // restartButton.gameObject.SetActive(true); // Show button when game is over
+        }
     }
 
 
@@ -171,8 +198,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetPlugPlayer()
     {
-        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        plugPlayerConnected = true;
+        //These next two lines are for debugging the timer, we do NOT want these here in the final build.
+        // Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         plugModel.GetComponent<ObserverController>().enabled = false;
         
         // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
@@ -191,6 +220,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetObserver()
     {
+        observerConnected = true;
         plugModel.GetComponent<PlugPlayerController>().enabled = false;
         // observerPlayer = new PlayerController();
         // PlayerButton left = leftButton.GetComponent<PlayerButton>();
@@ -211,6 +241,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         // CW.SetEnabled(false);
         // CCW.SetEnabled(false);
 
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
         Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
 

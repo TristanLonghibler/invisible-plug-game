@@ -3121,8 +3121,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loseText: {fileID: 955042855}
-  winText: {fileID: 1477825544}
+  winText: {fileID: 0}
   plugModel: {fileID: 4047714051955190737}
+  trigger: {fileID: 911642942}
+  triggerd: {fileID: 86673851}
   timerText: {fileID: 1379003844}
 --- !u!1 &1998526018
 GameObject:
