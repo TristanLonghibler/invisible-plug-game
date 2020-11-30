@@ -49,6 +49,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     private GameObject timerText;
 
+    [Tooltip("Reset Button")]
+    [SerializeField]
+    private Button restartButton;
+
     // [Tooltip("Left Button")]
     // [SerializeField]
     // private GameObject leftButton;
@@ -118,6 +122,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         timer.Countdown = time;
         timerUI.text = time.ToString();
+
+        restartButton.onClick.AddListener(OnRestartButtonClick);
+        restartButton.gameObject.SetActive(false);
 
         Debug.Log("Offline Mode: " + isOfflineMode);
         if (isOfflineMode) {
@@ -261,10 +268,21 @@ public class GameManager : MonoBehaviourPunCallbacks
     public void EndGame() {
         if(didWin) {
             winText.enabled = true;
+            Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired -= OnCountdownTimerHasExpired;
+            timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>().enabled = false;
+            // UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
+            // timerUI.text = timer.Countdown.ToString();
         }
         else if(!didWin) {
             loseText.enabled = true;
         }
+
+        restartButton.gameObject.SetActive(true);
+    }
+
+    [PunRPC]
+    public void OnRestartButtonClick() {
+        SceneManager.LoadScene("Game"); // Restart the game
     }
 
     // public void gameOver()

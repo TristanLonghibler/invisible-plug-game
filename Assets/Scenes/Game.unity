@@ -1178,8 +1178,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: onRestartButtonPress
+      - m_Target: {fileID: 11500000, guid: 4433564e76b1940028e7e531f171050d, type: 3}
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3210,6 +3210,7 @@ MonoBehaviour:
   trigger: {fileID: 911642942}
   triggerd: {fileID: 86673851}
   timerText: {fileID: 1379003844}
+  restartButton: {fileID: 770154720}
 --- !u!1 &1998526018
 GameObject:
   m_ObjectHideFlags: 0
