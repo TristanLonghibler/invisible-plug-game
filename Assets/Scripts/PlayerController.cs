@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton, ForwardButton, BackwardsButton;
     public bool buttonPressed;
     public float speed = 5f;
     public Text winText;
@@ -97,7 +97,8 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown (KeyCode.Alpha1)) switchMainCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha2)) switchLeftCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha3)) switchRightCamera();
-
+        if (BackwardsButton.IsPressed) rb.AddForce(0, 0, -10f * speed); ;
+        if (ForwardButton.IsPressed) rb.AddForce(0, 0, 10f * speed); ;
         if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
         if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
         if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);
