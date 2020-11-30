@@ -3121,7 +3121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loseText: {fileID: 955042855}
-  winText: {fileID: 0}
+  winText: {fileID: 1477825545}
   plugModel: {fileID: 4047714051955190737}
   trigger: {fileID: 911642942}
   triggerd: {fileID: 86673851}
@@ -3730,6 +3730,7 @@ GameObject:
   - component: {fileID: 4047714051955190742}
   - component: {fileID: 4047714051955190741}
   - component: {fileID: 4047714051955190746}
+  - component: {fileID: 4047714051955190747}
   - component: {fileID: 4047714051955190740}
   - component: {fileID: 4047714051955190739}
   - component: {fileID: 4047714051955190738}
@@ -3801,6 +3802,8 @@ MonoBehaviour:
   CWButton: {fileID: 1886617822}
   CCWButton: {fileID: 1066809557}
   speed: 5
+  trigger: {fileID: 911642942}
+  triggerd: {fileID: 86673851}
 --- !u!54 &4047714051955190742
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3883,6 +3886,20 @@ MonoBehaviour:
   mainCam: {fileID: 963194227}
   leftCam: {fileID: 880523859}
   rightCam: {fileID: 475036005}
+--- !u!114 &4047714051955190747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4047714051955190737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4cc0384601d58d4cadd5842c67d098c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 911642942}
+  triggerd: {fileID: 86673851}
 --- !u!4 &4048265250481205477
 Transform:
   m_ObjectHideFlags: 0

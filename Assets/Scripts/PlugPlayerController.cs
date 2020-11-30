@@ -8,6 +8,9 @@ public class PlugPlayerController : MonoBehaviour
     public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
     public float speed = 5f;
 
+    // public GameObject trigger;
+    // public GameObject triggerd;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,4 +50,20 @@ public class PlugPlayerController : MonoBehaviour
         if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
     }
+
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if(other.gameObject.CompareTag("Trigger"))
+    //     {
+    //         // winText.text = "You Win!";
+    //         // didWin = true;
+    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
+    //     }
+    //     else if(other.gameObject.CompareTag("Trigger1"))
+    //     {
+    //         // winText.text = "You Win!";
+    //         // didWin = true;
+    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
+    //     }
+    // }
 }

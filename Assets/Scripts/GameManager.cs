@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviourPunCallbacks
 {
     public static bool isOfflineMode = true;
     public static bool timerRunning = true;
+    public static bool didWin = false;
     private bool plugPlayerConnected = false;
     private bool observerConnected = false;
 
@@ -84,7 +85,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        // Instance = this;
+        Instance = this;
         plugModel.transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
         
         // Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
@@ -122,6 +123,8 @@ public class GameManager : MonoBehaviourPunCallbacks
         Debug.Log("Offline Mode: " + isOfflineMode);
         if (isOfflineMode) {
             PhotonNetwork.OfflineMode = true;
+            plugPlayerConnected = true;
+            observerConnected = true;
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         }
         else if (PhotonNetwork.IsMasterClient)
@@ -132,7 +135,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         else {
             SetObserver();
         }
-
+        if (plugPlayerConnected && observerConnected) {
+            StartGame();
+        }
     }
 
     public override void OnLeftRoom()
@@ -147,7 +152,7 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-
+        if (didWin == true) EndGame();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -246,9 +251,15 @@ public class GameManager : MonoBehaviourPunCallbacks
     }
 
 
-
+    // [PunRPC]
     public void StartGame() {
-        
+        loseText.text = "";
+        winText.text = "";
+    }
+
+    // [PunRPC]
+    public void EndGame() {
+        winText.text = "You Win!";
     }
 
     // public void gameOver()
