@@ -134,9 +134,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         else {
             SetObserver();
         }
-        // if (plugPlayerConnected && observerConnected) {
-        //     StartGame();
-        // }
+        if (plugPlayerConnected && observerConnected) {
+            StartGame();
+        }
     }
 
     public override void OnLeftRoom()
@@ -220,6 +220,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         // leftCamera.SetActive(false);
         // rightCamera.SetActive(false);
         // mainCamera.SetActive(false);
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
     }
 
     void SetObserver()
@@ -252,11 +253,11 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     // [PunRPC]
     public void StartGame() {
-        loseText.text = "";
-        winText.text = "";
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
 
-    // [PunRPC]
+    [PunRPC]
     public void EndGame() {
         if(didWin) {
             winText.enabled = true;

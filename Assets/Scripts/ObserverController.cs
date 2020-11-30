@@ -10,12 +10,14 @@ public class ObserverController : MonoBehaviour
     public Camera mainCam;
     public Camera leftCam;
     public Camera rightCam;
+    public Camera plugPlayerCam;
     // Start is called before the first frame update
     void Start()
     {
         mainCam.enabled = true;
         leftCam.enabled = false;
         rightCam.enabled = false;
+        plugPlayerCam.enabled = false;
     }
 
     // Update is called once per frame
