@@ -2206,7 +2206,6 @@ GameObject:
   - component: {fileID: 1379003847}
   - component: {fileID: 1379003846}
   - component: {fileID: 1379003848}
-  - component: {fileID: 1379003849}
   m_Layer: 5
   m_Name: Timer Text
   m_TagString: Untagged
@@ -2281,25 +2280,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379003844}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ffc398cf76e6d458caf303b5fceea504, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Countdown: 5
   Text: {fileID: 1379003846}
---- !u!114 &1379003849
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1379003844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a00ccad8d7f73dc4780ee7bd24eeb34d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1459932304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3133,7 +3120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566bb6cc8ad142a41a0e6b147c6a9aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loseText: {fileID: 955042853}
+  loseText: {fileID: 955042855}
   winText: {fileID: 1477825544}
   plugModel: {fileID: 4047714051955190737}
   timerText: {fileID: 1379003844}

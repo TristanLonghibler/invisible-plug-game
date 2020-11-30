@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static bool isOfflineMode = true;
+    public static bool timerRunning = true;
 
     [Tooltip("Lose Text")]
     [SerializeField]
-    private GameObject loseText;
+    private Text loseText;
 
     [Tooltip("Win Text")]
     [SerializeField]
@@ -64,6 +66,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     private Player plugPlayer;
     private Player observerPlayer;
     public static GameManager Instance;
+
+    void OnCountdownTimerHasExpired() {
+        loseText.text = "You lose.";
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -124,14 +130,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Menu");
     }
 
+    public void onTimerEnd() {
+
+    }
     // Update is called once per frame
-    // void Update() {
-    //     if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
-    //         return;
-    //     }
-
-
-    // }
+    void Update() {
+        // Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        
+    }
 
 
     public float GetTime() {
@@ -165,6 +171,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     void SetPlugPlayer()
     {
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         plugModel.GetComponent<ObserverController>().enabled = false;
         
         // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
@@ -205,6 +213,20 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
+
+
+
+    public void StartGame() {
+        
+    }
+
+    // public void gameOver()
+    // {
+    //     loseText.text.text = "You Lose";
+    //     trigger.SetActive(false);
+    //     triggerd.SetActive(false);
+    //     restartButton.gameObject.SetActive(true); // Show button when game is over
+    // }
 
     public override void OnPlayerEnteredRoom(Player other)
     {

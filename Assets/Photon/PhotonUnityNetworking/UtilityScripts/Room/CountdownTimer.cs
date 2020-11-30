@@ -102,10 +102,11 @@ namespace Photon.Pun.UtilityScripts
         private void OnTimerEnds()
         {
             this.isTimerRunning = false;
-            this.enabled = false;
+            //NOTE: These lines are commented because we did not want the timer field to be emptyr after the timer runs out.
+            // this.enabled = false;
 
-            Debug.Log("Emptying info text.", this.Text);
-            this.Text.text = string.Empty;
+            // Debug.Log("Emptying info text.", this.Text);
+            // this.Text.text = string.Empty;
 
             if (OnCountdownTimerHasExpired != null) OnCountdownTimerHasExpired();
         }
