@@ -17,8 +17,10 @@ public class PlugPlayerController : MonoBehaviour
         rightButton.gameObject.SetActive(true);
         leftButton.gameObject.SetActive(true);
         downButton.gameObject.SetActive(true);
-        CWButton.gameObject.SetActive(true);
-        CCWButton.gameObject.SetActive(true);
+        if (Difficulty.currentDifficulty != Difficulty.Difficulties.Easy) {
+            CWButton.gameObject.SetActive(true);
+            CCWButton.gameObject.SetActive(true);
+        }
     }
 
     // Update is called once per frame

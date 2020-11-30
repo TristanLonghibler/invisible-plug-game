@@ -48,6 +48,7 @@ public class MenuController : MonoBehaviourPunCallbacks
     // Starts game if player hits button
     public void onStartButtonPress()
     {
+        GameManager.isOfflineMode = false;
         Connect();
     }
 

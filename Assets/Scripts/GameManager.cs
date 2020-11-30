@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
+    public static bool isOfflineMode = true;
 
     [Tooltip("Lose Text")]
     [SerializeField]
@@ -34,9 +33,9 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     // ExitGames.Client.Photon.Hashtable CustomValue;
 
-    // [Tooltip("Timer Text")]
-    // [SerializeField]
-    // private GameObject timerText;
+    [Tooltip("Timer Text")]
+    [SerializeField]
+    private GameObject timerText;
 
     // [Tooltip("Left Button")]
     // [SerializeField]
@@ -66,9 +65,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     private Player observerPlayer;
     public static GameManager Instance;
 
+    // Start is called before the first frame update
     void Start()
     {
         // Instance = this;
+        plugModel.transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
+        
         // Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
         // PlayerButton CW = CWButton.GetComponent<PlayerButton>();
         // PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
@@ -79,8 +81,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         //     case Difficulty.Difficulties.Easy:
         //         timer.Countdown = 60f;
         //         timerUI.text = 60f.ToString();
-        //         CW.SetEnabled(false);
-        //         CCW.SetEnabled(false);
         //         break;
         //     case Difficulty.Difficulties.Medium:
         //         timer.Countdown = 50f;
@@ -95,9 +95,20 @@ public class GameManager : MonoBehaviourPunCallbacks
         //         break;
         // }
 
-        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
 
-        if (PhotonNetwork.IsMasterClient)
+        float time = GetTime();
+
+        timer.Countdown = time;
+        timerUI.text = time.ToString();
+
+        Debug.Log("Offline Mode: " + isOfflineMode);
+        if (isOfflineMode) {
+            PhotonNetwork.OfflineMode = true;
+            // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        }
+        else if (PhotonNetwork.IsMasterClient)
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
@@ -121,6 +132,31 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
     // }
+
+
+    public float GetTime() {
+        // Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        // PlayerButton CW = CWButton.GetComponent<PlayerButton>();
+        // PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
+        // UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
+        // // CustomValue = new ExitGames.Client.Photon.Hashtable();
+        // // double startTime = PhotonNetwork.Time;
+        switch (Difficulty.currentDifficulty) {
+            case Difficulty.Difficulties.Easy:
+                return 60f;
+                break;
+            case Difficulty.Difficulties.Medium:
+                return 50f;
+                break;
+            case Difficulty.Difficulties.Hard:
+                return 40f;
+                break;
+            default:
+                Debug.Log("Default case");
+                return 60f;
+                break;
+        }
+    }
 
     public void LeaveRoom()
     {
@@ -167,7 +203,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         // CW.SetEnabled(false);
         // CCW.SetEnabled(false);
 
-        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
 
     public override void OnPlayerEnteredRoom(Player other)
