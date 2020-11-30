@@ -24,7 +24,7 @@ public class PlugCollisionDetection : MonoBehaviourPunCallbacks
     {
         if(other.gameObject.CompareTag("Trigger"))
         {
-            // GameManager.didWin = true;
+            GameManager.Instance.didWin = true;
             GameManager.Instance.EndGame();
             // winText.text = "You Win!";
             // didWin = true;
@@ -32,7 +32,7 @@ public class PlugCollisionDetection : MonoBehaviourPunCallbacks
         }
         else if(other.gameObject.CompareTag("Trigger1"))
         {
-            // GameManager.didWin = true;
+            GameManager.Instance.didWin = true;
             GameManager.Instance.EndGame();
             // winText.text = "You Win!";
             // didWin = true;

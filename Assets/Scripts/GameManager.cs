@@ -7,8 +7,7 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public static bool isOfflineMode = true;
-    public static bool timerRunning = true;
-    public static bool didWin = false;
+    public bool didWin = false;
     private bool plugPlayerConnected = false;
     private bool observerConnected = false;
 
@@ -79,7 +78,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     public static GameManager Instance;
 
     void OnCountdownTimerHasExpired() {
-        loseText.text = "You lose.";
+        Instance.EndGame();
     }
 
     // Start is called before the first frame update
@@ -135,9 +134,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         else {
             SetObserver();
         }
-        if (plugPlayerConnected && observerConnected) {
-            StartGame();
-        }
+        // if (plugPlayerConnected && observerConnected) {
+        //     StartGame();
+        // }
     }
 
     public override void OnLeftRoom()
@@ -152,24 +151,24 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
 
-        if (didWin == true) EndGame();
+        // if (didWin == true) EndGame();
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("Trigger"))
-        {
-            winText.text = "You Win!";
-            // didWin = true;
-            // restartButton.gameObject.SetActive(true); // Show button when game is over
-        }
-        else if(other.gameObject.CompareTag("Trigger1"))
-        {
-            winText.text = "You Win!";
-            // didWin = true;
-            // restartButton.gameObject.SetActive(true); // Show button when game is over
-        }
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     if(other.gameObject.CompareTag("Trigger"))
+    //     {
+    //         winText.text = "You Win!";
+    //         // didWin = true;
+    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
+    //     }
+    //     else if(other.gameObject.CompareTag("Trigger1"))
+    //     {
+    //         winText.text = "You Win!";
+    //         // didWin = true;
+    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
+    //     }
+    // }
 
 
     public float GetTime() {
@@ -259,7 +258,12 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     // [PunRPC]
     public void EndGame() {
-        winText.text = "You Win!";
+        if(didWin) {
+            winText.enabled = true;
+        }
+        else if(!didWin) {
+            loseText.enabled = true;
+        }
     }
 
     // public void gameOver()

@@ -1536,7 +1536,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 955042853}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1561,7 +1561,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Lose Text
+  m_Text: You Lose
 --- !u!222 &955042856
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2406,7 +2406,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477825544}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -2431,7 +2431,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Win Text
+  m_Text: You Win!
 --- !u!222 &1477825546
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3120,6 +3120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 566bb6cc8ad142a41a0e6b147c6a9aae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  didWin: 0
   loseText: {fileID: 955042855}
   winText: {fileID: 1477825545}
   plugModel: {fileID: 4047714051955190737}
@@ -3802,8 +3803,6 @@ MonoBehaviour:
   CWButton: {fileID: 1886617822}
   CCWButton: {fileID: 1066809557}
   speed: 5
-  trigger: {fileID: 911642942}
-  triggerd: {fileID: 86673851}
 --- !u!54 &4047714051955190742
 Rigidbody:
   m_ObjectHideFlags: 0
