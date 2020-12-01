@@ -455,7 +455,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 105321867}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!4 &105321870
 Transform:
   m_ObjectHideFlags: 0
@@ -1109,6 +1109,7 @@ GameObject:
   - component: {fileID: 770154722}
   - component: {fileID: 770154721}
   - component: {fileID: 770154720}
+  - component: {fileID: 770154723}
   m_Layer: 5
   m_Name: Restart Button
   m_TagString: Untagged
@@ -1178,9 +1179,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 4433564e76b1940028e7e531f171050d, type: 3}
+      - m_Target: {fileID: 0}
         m_MethodName: 
-        m_Mode: 1
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1226,6 +1227,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 770154718}
   m_CullTransparentMesh: 0
+--- !u!114 &770154723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770154718}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21efee60d48086e45b96c85a69e17918, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  resetButton: {fileID: 770154720}
 --- !u!1 &848220739
 GameObject:
   m_ObjectHideFlags: 0

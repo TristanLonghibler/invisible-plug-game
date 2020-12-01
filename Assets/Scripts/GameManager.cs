@@ -137,13 +137,14 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
+            PhotonNetwork.AutomaticallySyncScene = true;
         }
         else {
             SetObserver();
         }
-        if (plugPlayerConnected && observerConnected) {
-            StartGame();
-        }
+        // if (plugPlayerConnected && observerConnected) {
+        //     StartGame();
+        // }
     }
 
     public override void OnLeftRoom()
@@ -259,10 +260,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
 
     // [PunRPC]
-    public void StartGame() {
-        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
-    }
+    // public void StartGame() {
+    //     Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+    //     Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+    // }
 
     [PunRPC]
     public void EndGame() {
@@ -282,7 +283,15 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     public void OnRestartButtonClick() {
-        SceneManager.LoadScene("Game"); // Restart the game
+        // PhotonNetwork.automaticallySyncScene = true;
+        // if (PhotonNetwork.IsMasterClient) {
+        //     PhotonNetwork.AutomaticallySyncScene = true;
+        //     PhotonNetwork.LoadLevel("Game"); // Restart the game
+        // }
+        
+        SceneManager.LoadScene("Game");
+
+
     }
 
     // public void gameOver()
