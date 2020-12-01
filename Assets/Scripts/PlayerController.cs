@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using Photon.Pun;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviourPunCallbacks
 {
     private Rigidbody rb;
     public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public Camera rightCam;
     public Button restartButton;
 
+    private bool isPlugPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,32 +35,32 @@ public class PlayerController : MonoBehaviour
         trigger = GameObject.FindWithTag("Trigger");
         triggerd = GameObject.FindWithTag("Trigger1");
         mainCam = Camera.main;
-        mainCam.enabled = true;
-        leftCam.enabled = false;
-        rightCam.enabled = false;
+        // mainCam.enabled = true;
+        // leftCam.enabled = false;
+        // rightCam.enabled = false;
         transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
         winText.text = "";
         loseText.text = "";
 
-        switch (Difficulty.currentDifficulty) {
-            case Difficulty.Difficulties.Easy:
-                timer = 60f;
-                timerText.text = timer.ToString();
-                CWButton.SetEnabled(false);
-                CCWButton.SetEnabled(false);
-                break;
-            case Difficulty.Difficulties.Medium:
-                timer = 50f;
-                timerText.text = timer.ToString();
-                break;
-            case Difficulty.Difficulties.Hard:
-                timer = 40f;
-                timerText.text = timer.ToString();
-                break;
-            default:
-                Debug.Log("Default case");
-                break;
-        }
+        // switch (Difficulty.currentDifficulty) {
+        //     case Difficulty.Difficulties.Easy:
+        //         timer = 60f;
+        //         timerText.text = timer.ToString();
+        //         CWButton.SetEnabled(false);
+        //         CCWButton.SetEnabled(false);
+        //         break;
+        //     case Difficulty.Difficulties.Medium:
+        //         timer = 50f;
+        //         timerText.text = timer.ToString();
+        //         break;
+        //     case Difficulty.Difficulties.Hard:
+        //         timer = 40f;
+        //         timerText.text = timer.ToString();
+        //         break;
+        //     default:
+        //         Debug.Log("Default case");
+        //         break;
+        // }
         // timer = 60f; // Set timer for 60 seconds
         // timerText.text = timer.ToString();
         restartButton.gameObject.SetActive(false); // Hide restart button at start
@@ -66,6 +69,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (photonView.IsMine == false && PhotonNetwork.IsConnected == true) {
+            return;
+        }
         float h = Input.GetAxis("Horizontal") * speed;
         float v = Input.GetAxis("Vertical") * speed;
 
@@ -84,7 +90,7 @@ public class PlayerController : MonoBehaviour
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
 
         // Continue counting down until player wins or loses
-        if(didWin == false) gameTimer();
+        // if(didWin == false) gameTimer();
 
         // Switch between the main, left, and right cameras
         // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera
