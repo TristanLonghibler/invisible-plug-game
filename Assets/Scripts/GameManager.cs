@@ -137,10 +137,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
-            PhotonNetwork.AutomaticallySyncScene = true;
+            // PhotonNetwork.AutomaticallySyncScene = true;
         }
         else {
             SetObserver();
+
         }
         // if (plugPlayerConnected && observerConnected) {
         //     StartGame();
@@ -283,9 +284,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     public void OnRestartButtonClick() {
-        // PhotonNetwork.automaticallySyncScene = true;
+        // PhotonNetwork.AutomaticallySyncScene = true;
+
         if (PhotonNetwork.IsMasterClient) {
-            PhotonNetwork.AutomaticallySyncScene = true;
+            // PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.LoadLevel("Game"); // Restart the game
         }
         
