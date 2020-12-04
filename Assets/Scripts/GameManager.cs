@@ -284,12 +284,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void OnRestartButtonClick() {
         // PhotonNetwork.automaticallySyncScene = true;
-        // if (PhotonNetwork.IsMasterClient) {
-        //     PhotonNetwork.AutomaticallySyncScene = true;
-        //     PhotonNetwork.LoadLevel("Game"); // Restart the game
-        // }
+        if (PhotonNetwork.IsMasterClient) {
+            PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.LoadLevel("Game"); // Restart the game
+        }
         
-        SceneManager.LoadScene("Game");
+        // SceneManager.LoadScene("Game");
 
 
     }
