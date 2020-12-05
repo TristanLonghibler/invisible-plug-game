@@ -137,10 +137,11 @@ public class GameManager : MonoBehaviourPunCallbacks
         {
             // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
-            PhotonNetwork.AutomaticallySyncScene = true;
+            // PhotonNetwork.AutomaticallySyncScene = true;
         }
         else {
             SetObserver();
+
         }
         // if (plugPlayerConnected && observerConnected) {
         //     StartGame();
@@ -281,15 +282,38 @@ public class GameManager : MonoBehaviourPunCallbacks
         restartButton.gameObject.SetActive(true);
     }
 
+    public void ResetGame() {
+        winText.enabled = false;
+        loseText.enabled = false;
+
+        Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
+
+        float time = GetTime();
+
+        timer.Countdown = time;
+        timerUI.text = time.ToString();
+
+        restartButton.gameObject.SetActive(false);
+
+        timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>().enabled = true;
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+    }
+
     [PunRPC]
     public void OnRestartButtonClick() {
-        // PhotonNetwork.automaticallySyncScene = true;
-        // if (PhotonNetwork.IsMasterClient) {
-        //     PhotonNetwork.AutomaticallySyncScene = true;
-        //     PhotonNetwork.LoadLevel("Game"); // Restart the game
-        // }
+        // PhotonNetwork.AutomaticallySyncScene = true;
+
+        if (PhotonNetwork.IsMasterClient) {
+            // PhotonNetwork.AutomaticallySyncScene = true;
+            PhotonNetwork.LoadLevel("Game"); // Restart the game
+        }
+        else {
+            ResetGame();
+        }
         
-        SceneManager.LoadScene("Game");
+        // SceneManager.LoadScene("Game");
 
 
     }
