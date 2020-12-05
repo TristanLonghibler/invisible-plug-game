@@ -282,6 +282,25 @@ public class GameManager : MonoBehaviourPunCallbacks
         restartButton.gameObject.SetActive(true);
     }
 
+    public void ResetGame() {
+        winText.enabled = false;
+        loseText.enabled = false;
+
+        Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
+        UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
+
+        float time = GetTime();
+
+        timer.Countdown = time;
+        timerUI.text = time.ToString();
+
+        restartButton.gameObject.SetActive(false);
+
+        timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>().enabled = true;
+        Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
+        Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
+    }
+
     [PunRPC]
     public void OnRestartButtonClick() {
         // PhotonNetwork.AutomaticallySyncScene = true;
@@ -289,6 +308,9 @@ public class GameManager : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient) {
             // PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.LoadLevel("Game"); // Restart the game
+        }
+        else {
+            ResetGame();
         }
         
         // SceneManager.LoadScene("Game");
