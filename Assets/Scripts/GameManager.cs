@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviourPunCallbacks
                 return 60f;
                 break;
             case Difficulty.Difficulties.Medium:
-                return 50f;
+                return 120f;
                 break;
             case Difficulty.Difficulties.Hard:
                 return 40f;
