@@ -11,6 +11,9 @@ public class ObserverController : MonoBehaviour
     public Camera leftCam;
     public Camera rightCam;
     public Camera plugPlayerCam;
+    public Button leftCameraButton;
+    public Button mainCameraButton;
+    public Button rightCameraButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,6 +21,13 @@ public class ObserverController : MonoBehaviour
         leftCam.enabled = false;
         rightCam.enabled = false;
         plugPlayerCam.enabled = false;
+        leftCameraButton.gameObject.SetActive(true);
+        mainCameraButton.gameObject.SetActive(true);
+        rightCameraButton.gameObject.SetActive(true);
+
+        leftCameraButton.onClick.AddListener(switchLeftCamera);
+        mainCameraButton.onClick.AddListener(switchMainCamera);
+        rightCameraButton.onClick.AddListener(switchRightCamera);
     }
 
     // Update is called once per frame
