@@ -52,17 +52,17 @@
 
         public static void SetValue(this InputField inputField, string v)
         {
-            #if UNITY_2019_1_OR_NEWER
-            // inputField.SetValueWithoutNotify(v);
-            #else
-            InputField.OnChangeEvent origianlEvent = inputField.onValueChanged;
-            InputField.SubmitEvent originalSubmitEvent = inputField.onEndEdit;
-            inputField.onValueChanged = emptyInputFieldEvent;
-            inputField.onEndEdit = emptyInputFieldSubmitEvent;
-            inputField.text = v;
-            inputField.onValueChanged = origianlEvent;
-            inputField.onEndEdit = originalSubmitEvent;
-            #endif
+            //#if UNITY_2019_1_OR_NEWER
+            //inputField.SetValueWithoutNotify(v);
+            //#else
+            //InputField.OnChangeEvent origianlEvent = inputField.onValueChanged;
+            //InputField.SubmitEvent originalSubmitEvent = inputField.onEndEdit;
+            //inputField.onValueChanged = emptyInputFieldEvent;
+            //inputField.onEndEdit = emptyInputFieldSubmitEvent;
+            //inputField.text = v;
+            //inputField.onValueChanged = origianlEvent;
+            //inputField.onEndEdit = originalSubmitEvent;
+            //#endif
         }
 
         // https://forum.unity.com/threads/deleting-all-chidlren-of-an-object.92827/#post-2058407
