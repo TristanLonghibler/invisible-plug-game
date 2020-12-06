@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlugPlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton;
+    public PlayerButton upButton, rightButton, leftButton, downButton, CWButton, CCWButton, BackwardsButton, ForwardButton;
     public float speed = 5f;
 
     // public GameObject trigger;
@@ -24,6 +24,9 @@ public class PlugPlayerController : MonoBehaviour
             CWButton.gameObject.SetActive(true);
             CCWButton.gameObject.SetActive(true);
         }
+
+        BackwardsButton.gameObject.SetActive(true);
+        ForwardButton.gameObject.SetActive(true);
     }
 
     // Update is called once per frame
@@ -49,6 +52,8 @@ public class PlugPlayerController : MonoBehaviour
         if (downButton.IsPressed) rb.AddForce(0, -10f * speed, 0);
         if (CWButton.IsPressed) rb.transform.Rotate(0, 0, 0.5f);
         if (CCWButton.IsPressed) rb.transform.Rotate(0, 0, -0.5f);
+        if (BackwardsButton.IsPressed) rb.AddForce(0, 0, -10f * speed);
+        if (ForwardButton.IsPressed) rb.AddForce(0, 0, 10f * speed);
     }
 
     // private void OnTriggerEnter(Collider other)
