@@ -35,8 +35,8 @@ public class ObserverController : MonoBehaviour
     {
         // Switch between the main, left, and right cameras
         // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera
-        if(Input.GetKeyDown (KeyCode.Alpha1)) switchMainCamera();
-        else if(Input.GetKeyDown (KeyCode.Alpha2)) switchLeftCamera();
+        if(Input.GetKeyDown (KeyCode.Alpha1)) switchLeftCamera();
+        else if(Input.GetKeyDown (KeyCode.Alpha2)) switchMainCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha3)) switchRightCamera();
     }
 
