@@ -6,7 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
-    public static bool isOfflineMode = true;
+    public static bool isOfflineMode = true; //This is mainly for development purposes. This stays true if the Game scene is directly loaded in the Unity editor, and allows one player to have both the plug and observer controls at once.
     public bool didWin = false;
     private bool plugPlayerConnected = false;
     private bool observerConnected = false;
@@ -31,20 +31,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField]
     public GameObject triggerd;
 
-    // [Tooltip("Left Camera")]
-    // [SerializeField]
-    // private GameObject leftCamera;
-
-    // [Tooltip("Right Camera")]
-    // [SerializeField]
-    // private GameObject rightCamera;
-
-    // [Tooltip("Main Camera")]
-    // [SerializeField]
-    // private GameObject mainCamera;
-
-    // ExitGames.Client.Photon.Hashtable CustomValue;
-
     [Tooltip("Timer Text")]
     [SerializeField]
     private GameObject timerText;
@@ -52,30 +38,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("Reset Button")]
     [SerializeField]
     private Button restartButton;
-
-    // [Tooltip("Left Button")]
-    // [SerializeField]
-    // private GameObject leftButton;
-
-    // [Tooltip("Right Button")]
-    // [SerializeField]
-    // private GameObject rightButton;
-
-    // [Tooltip("Up Button")]
-    // [SerializeField]
-    // private GameObject upButton;
-
-    // [Tooltip("Down Button")]
-    // [SerializeField]
-    // private GameObject downButton;
-
-    // [Tooltip("CWButton")]
-    // [SerializeField]
-    // private GameObject CWButton;
-
-    // [Tooltip ("CCWButton")]
-    // [SerializeField]
-    // private GameObject CCWButton;
 
     private Player plugPlayer;
     private Player observerPlayer;
@@ -90,30 +52,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Instance = this;
         plugModel.transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
-        
-        // Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
-        // PlayerButton CW = CWButton.GetComponent<PlayerButton>();
-        // PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
-        // UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
-        // // CustomValue = new ExitGames.Client.Photon.Hashtable();
-        // // double startTime = PhotonNetwork.Time;
-        // switch (Difficulty.currentDifficulty) {
-        //     case Difficulty.Difficulties.Easy:
-        //         timer.Countdown = 60f;
-        //         timerUI.text = 60f.ToString();
-        //         break;
-        //     case Difficulty.Difficulties.Medium:
-        //         timer.Countdown = 50f;
-        //         timerUI.text = 50f.ToString();
-        //         break;
-        //     case Difficulty.Difficulties.Hard:
-        //         timer.Countdown = 40f;
-        //         timerUI.text = 40f.ToString();
-        //         break;
-        //     default:
-        //         Debug.Log("Default case");
-        //         break;
-        // }
 
         Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
         UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
@@ -131,21 +69,15 @@ public class GameManager : MonoBehaviourPunCallbacks
             PhotonNetwork.OfflineMode = true;
             plugPlayerConnected = true;
             observerConnected = true;
-            // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         }
         else if (PhotonNetwork.IsMasterClient)
         {
-            // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
             SetPlugPlayer();
-            // PhotonNetwork.AutomaticallySyncScene = true;
         }
         else {
             SetObserver();
 
         }
-        // if (plugPlayerConnected && observerConnected) {
-        //     StartGame();
-        // }
     }
 
     public override void OnLeftRoom()
@@ -153,40 +85,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         SceneManager.LoadScene("Menu");
     }
 
-    // Update is called once per frame
-    void Update() {
-        // Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-        if (!plugPlayerConnected || !observerConnected) {
-            return;
-        }
-
-        // if (didWin == true) EndGame();
-    }
-
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if(other.gameObject.CompareTag("Trigger"))
-    //     {
-    //         winText.text = "You Win!";
-    //         // didWin = true;
-    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
-    //     }
-    //     else if(other.gameObject.CompareTag("Trigger1"))
-    //     {
-    //         winText.text = "You Win!";
-    //         // didWin = true;
-    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
-    //     }
-    // }
-
-
     public float GetTime() {
-        // Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
-        // PlayerButton CW = CWButton.GetComponent<PlayerButton>();
-        // PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
-        // UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
-        // // CustomValue = new ExitGames.Client.Photon.Hashtable();
-        // // double startTime = PhotonNetwork.Time;
         switch (Difficulty.currentDifficulty) {
             case Difficulty.Difficulties.Easy:
                 return 60f;
@@ -212,23 +111,8 @@ public class GameManager : MonoBehaviourPunCallbacks
     void SetPlugPlayer()
     {
         plugPlayerConnected = true;
-        //These next two lines are for debugging the timer, we do NOT want these here in the final build.
-        // Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
         plugModel.GetComponent<ObserverController>().enabled = false;
         
-        // Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
-        // timerText.text = test.Text.text;
-        // Debug.Log(timerText.text);
-
-        // Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
-        // timerText.text = Photon.Pun.UtilityScripts.CountdownTimer.Text.text;
-        
-        // loseText.SetActive(false);
-        // winText.SetActive(false);
-        // leftCamera.SetActive(false);
-        // rightCamera.SetActive(false);
-        // mainCamera.SetActive(false);
         Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
     }
 
@@ -236,35 +120,10 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         observerConnected = true;
         plugModel.GetComponent<PlugPlayerController>().enabled = false;
-        // observerPlayer = new PlayerController();
-        // PlayerButton left = leftButton.GetComponent<PlayerButton>();
-        // PlayerButton right = rightButton.GetComponent<PlayerButton>();
-        // PlayerButton up = upButton.GetComponent<PlayerButton>();
-        // PlayerButton down = downButton.GetComponent<PlayerButton>();
-        // PlayerButton CW = CWButton.GetComponent<PlayerButton>();
-        // PlayerButton CCW = CCWButton.GetComponent<PlayerButton>();
-        // Debug.Log("SetObserver called.");
-        // leftCamera.SetActive(true);
-        // rightCamera.SetActive(false);
-        // mainCamera.SetActive(false);
-
-        // left.SetEnabled(false);
-        // right.SetEnabled(false);
-        // up.SetEnabled(false);
-        // down.SetEnabled(false);
-        // CW.SetEnabled(false);
-        // CCW.SetEnabled(false);
 
         Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
         Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
     }
-
-
-    // [PunRPC]
-    // public void StartGame() {
-    //     Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
-    //     Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
-    // }
 
     [PunRPC]
     public void EndGame() {
@@ -272,16 +131,20 @@ public class GameManager : MonoBehaviourPunCallbacks
             winText.enabled = true;
             Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired -= OnCountdownTimerHasExpired;
             timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>().enabled = false;
-            // UnityEngine.UI.Text timerUI = timerText.GetComponent<UnityEngine.UI.Text>();
-            // timerUI.text = timer.Countdown.ToString();
         }
         else if(!didWin) {
             loseText.enabled = true;
         }
 
+        plugModel.GetComponent<PlugPlayerController>().disableButtons();
+        plugModel.GetComponent<PlugPlayerController>().enabled = false;
+
+        plugModel.GetComponent<ObserverController>().disableButtons();
+        plugModel.GetComponent<ObserverController>().enabled = false;
         restartButton.gameObject.SetActive(true);
     }
 
+    //This function is not run by the MasterClient, only other clients. (In other words, only the observer.)
     public void ResetGame() {
         winText.enabled = false;
         loseText.enabled = false;
@@ -296,6 +159,10 @@ public class GameManager : MonoBehaviourPunCallbacks
 
         restartButton.gameObject.SetActive(false);
 
+        //These need to be explicity reenable by the observer because the Plug Player (who is the MasterClient) reloads the scene, and gets its scripts reenabled that way.
+        plugModel.GetComponent<ObserverController>().enabled = true;
+        plugModel.GetComponent<ObserverController>().enableButtons();
+
         timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>().enabled = true;
         Photon.Pun.UtilityScripts.CountdownTimer.OnCountdownTimerHasExpired += OnCountdownTimerHasExpired;
         Photon.Pun.UtilityScripts.CountdownTimer.SetStartTime();
@@ -303,36 +170,17 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [PunRPC]
     public void OnRestartButtonClick() {
-        // PhotonNetwork.AutomaticallySyncScene = true;
-
         if (PhotonNetwork.IsMasterClient) {
-            // PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.LoadLevel("Game"); // Restart the game
         }
         else {
             ResetGame();
         }
-        
-        // SceneManager.LoadScene("Game");
-
-
     }
-
-    // public void gameOver()
-    // {
-    //     loseText.text.text = "You Lose";
-    //     trigger.SetActive(false);
-    //     triggerd.SetActive(false);
-    //     restartButton.gameObject.SetActive(true); // Show button when game is over
-    // }
 
     public override void OnPlayerEnteredRoom(Player other)
     {
-        // if (PhotonNetwork.IsMasterClient) {
-        //     Photon.Pun.UtilityScripts.CountdownTimer test = new Photon.Pun.UtilityScripts.CountdownTimer();
-        //     timerText = test.Text;
-        //     Debug.Log(timerText);
-        // }
+        
     }
 
     public override void OnPlayerLeftRoom(Player other)

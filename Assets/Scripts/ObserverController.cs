@@ -34,7 +34,7 @@ public class ObserverController : MonoBehaviour
     void Update()
     {
         // Switch between the main, left, and right cameras
-        // Key 1 swicthes to main (center), 2 switches to left, and 3 switches to right angled camera
+        // Key 1 swicthes to left, 2 switches to main (center), and 3 switches to right angled camera
         if(Input.GetKeyDown (KeyCode.Alpha1)) switchLeftCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha2)) switchMainCamera();
         else if(Input.GetKeyDown (KeyCode.Alpha3)) switchRightCamera();
@@ -58,5 +58,17 @@ public class ObserverController : MonoBehaviour
         mainCam.enabled = false;
         leftCam.enabled = false;
         rightCam.enabled = true;
+    }
+
+    public void disableButtons() {
+        leftCameraButton.enabled = false;
+        mainCameraButton.enabled = false;
+        rightCameraButton.enabled = false;
+    }
+
+    public void enableButtons() {
+        leftCameraButton.enabled = true;
+        mainCameraButton.enabled = true;
+        rightCameraButton.enabled = true;
     }
 }

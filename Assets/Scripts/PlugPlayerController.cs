@@ -56,19 +56,14 @@ public class PlugPlayerController : MonoBehaviour
         if (ForwardButton.IsPressed) rb.AddForce(0, 0, 10f * speed);
     }
 
-    // private void OnTriggerEnter(Collider other)
-    // {
-    //     if(other.gameObject.CompareTag("Trigger"))
-    //     {
-    //         // winText.text = "You Win!";
-    //         // didWin = true;
-    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
-    //     }
-    //     else if(other.gameObject.CompareTag("Trigger1"))
-    //     {
-    //         // winText.text = "You Win!";
-    //         // didWin = true;
-    //         // restartButton.gameObject.SetActive(true); // Show button when game is over
-    //     }
-    // }
+    public void disableButtons() {
+        upButton.enabled = false;
+        rightButton.enabled = false;
+        leftButton.enabled = false;
+        downButton.enabled = false;
+        CWButton.enabled = false;
+        CCWButton.enabled = false;
+        BackwardsButton.enabled = false;
+        ForwardButton.enabled = false;
+    }
 }
