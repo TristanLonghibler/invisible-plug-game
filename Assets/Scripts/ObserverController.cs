@@ -17,6 +17,7 @@ public class ObserverController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Enables all relevant buttons and cameras for the observer.
         mainCam.enabled = true;
         leftCam.enabled = false;
         rightCam.enabled = false;
@@ -25,6 +26,7 @@ public class ObserverController : MonoBehaviour
         mainCameraButton.gameObject.SetActive(true);
         rightCameraButton.gameObject.SetActive(true);
 
+        //Assigns functions to on-screen buttons for changing the camera.
         leftCameraButton.onClick.AddListener(switchLeftCamera);
         mainCameraButton.onClick.AddListener(switchMainCamera);
         rightCameraButton.onClick.AddListener(switchRightCamera);
@@ -60,12 +62,14 @@ public class ObserverController : MonoBehaviour
         rightCam.enabled = true;
     }
 
+    //Disables the buttons so that they are still on screen, but do not do anything when clicked.
     public void disableButtons() {
         leftCameraButton.enabled = false;
         mainCameraButton.enabled = false;
         rightCameraButton.enabled = false;
     }
 
+    //Re-enables the functionality of the buttons.
     public void enableButtons() {
         leftCameraButton.enabled = true;
         mainCameraButton.enabled = true;

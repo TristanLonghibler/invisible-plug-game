@@ -26,17 +26,11 @@ public class PlugCollisionDetection : MonoBehaviourPunCallbacks
         {
             GameManager.Instance.didWin = true;
             GameManager.Instance.EndGame();
-            // winText.text = "You Win!";
-            // didWin = true;
-            // restartButton.gameObject.SetActive(true); // Show button when game is over
         }
         else if(other.gameObject.CompareTag("Trigger1"))
         {
             GameManager.Instance.didWin = true;
             GameManager.Instance.EndGame();
-            // winText.text = "You Win!";
-            // didWin = true;
-            // restartButton.gameObject.SetActive(true); // Show button when game is over
         }
     }
 }

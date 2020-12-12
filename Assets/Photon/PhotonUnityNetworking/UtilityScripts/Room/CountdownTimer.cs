@@ -1,4 +1,5 @@
-﻿// --------------------------------------------------------------------------------------------------------------------
+﻿//IMPORTANT NOTE: This file is edited slightly for use in our Plug Game. The changes made can be found on lines 88-89, and lines 106-110. There are also comments noting what was changed in these two locations.
+// --------------------------------------------------------------------------------------------------------------------
 // <copyright file="CountdownTimer.cs" company="Exit Games GmbH">
 //   Part of: Photon Unity Utilities,
 // </copyright>

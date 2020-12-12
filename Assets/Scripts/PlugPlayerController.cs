@@ -16,10 +16,14 @@ public class PlugPlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         
+        //Enables all the relevant buttons for the plug player.
         upButton.gameObject.SetActive(true);
         rightButton.gameObject.SetActive(true);
         leftButton.gameObject.SetActive(true);
         downButton.gameObject.SetActive(true);
+
+        //This is supposed to hide rotation buttons if the difficulty is set to easy. Difficulties were not fully implemented, so the buttons are
+        //always enabled.
         if (Difficulty.currentDifficulty != Difficulty.Difficulties.Easy) {
             CWButton.gameObject.SetActive(true);
             CCWButton.gameObject.SetActive(true);
@@ -56,6 +60,9 @@ public class PlugPlayerController : MonoBehaviour
         if (ForwardButton.IsPressed) rb.AddForce(0, 0, 10f * speed);
     }
 
+    //This function is supposed to disable all buttons similar to the function in ObserverController.cs, but it does not work properly
+    //because the plug movement buttons use the PlayerButton script. Disabling the PlayerButton script still disables the functionality of the
+    //buttons.
     public void disableButtons() {
         upButton.enabled = false;
         rightButton.enabled = false;

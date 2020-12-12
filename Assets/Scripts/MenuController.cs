@@ -48,7 +48,6 @@ public class MenuController : MonoBehaviourPunCallbacks
     // Starts game if player hits button
     public void onStartButtonPress()
     {
-        GameManager.isOfflineMode = false;
         Connect();
     }
 
@@ -92,7 +91,6 @@ public class MenuController : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log("MENU OnJoinedRoom() called by PUN. Now this client is in a room.");
-        // SceneManager.LoadScene("Game");
         PhotonNetwork.LoadLevel("Game");
     }
 }
