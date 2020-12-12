@@ -50,6 +50,15 @@ public class PlugPlayerController : MonoBehaviour
             rb.AddForce(0, 0, -10f * speed);
         }
 
+        if (Input.GetKey(KeyCode.Q))
+        {
+            rb.transform.Rotate(0, 0, 0.5f);
+        }
+        else if (Input.GetKey(KeyCode.E))
+        {
+            rb.transform.Rotate(0, 0, -0.5f);
+        }
+
         if (rightButton.IsPressed) rb.AddForce(10f * speed, 0, 0);
         if (upButton.IsPressed) rb.AddForce(0, 10f * speed, 0);
         if (leftButton.IsPressed) rb.AddForce(-10f * speed, 0, 0);

@@ -48,6 +48,7 @@ public class MenuController : MonoBehaviourPunCallbacks
     // Starts game if player hits button
     public void onStartButtonPress()
     {
+        GameManager.inEditor = false; //Sets inEditor to false, because when we are starting the game at the start screen, we are either running a full build of the game outside of the editor, or we are wanting to test the game in actual multiplayer.
         Connect();
     }
 

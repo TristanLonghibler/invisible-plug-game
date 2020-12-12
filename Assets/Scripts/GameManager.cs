@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviourPunCallbacks
 {
     public bool didWin = false;
+    public static bool inEditor = true;
 
     [Tooltip("Lose Text")]
     [SerializeField]
@@ -19,14 +20,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     [Tooltip("Plug Model")]
     [SerializeField]
     private GameObject plugModel;
-
-    [Tooltip("Trigger")]
-    [SerializeField]
-    public GameObject trigger;
-
-    [Tooltip("Trigger1")]
-    [SerializeField]
-    public GameObject triggerd;
 
     [Tooltip("Timer Text")]
     [SerializeField]
@@ -61,7 +54,10 @@ public class GameManager : MonoBehaviourPunCallbacks
         restartButton.onClick.AddListener(OnRestartButtonClick);
         restartButton.gameObject.SetActive(false);
 
-        if (PhotonNetwork.IsMasterClient)
+        if (inEditor) {
+            PhotonNetwork.OfflineMode = true; //This is strictly for development and testing purposes.
+        }
+        else if (PhotonNetwork.IsMasterClient)
         {
             SetPlugPlayer();
         }
