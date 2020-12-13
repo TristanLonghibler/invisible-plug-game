@@ -66,7 +66,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: eee0df0204d13dc44bd52f839ff7d990
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Difficulty.unity
     guid: 7395f5e801b35ee448856ab22f8a58c2
   - enabled: 1
@@ -75,4 +75,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: b6461310d78e2624e84111c4ca79b8dd
+  - enabled: 1
+    path: Assets/Scenes/Help.unity
+    guid: bbb6c7b5475f32148bd45d0f0bdb3e5b
   m_configObjects: {}

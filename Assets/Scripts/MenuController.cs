@@ -51,6 +51,10 @@ public class MenuController : MonoBehaviourPunCallbacks
         GameManager.inEditor = false; //Sets inEditor to false, because when we are starting the game at the start screen, we are either running a full build of the game outside of the editor, or we are wanting to test the game in actual multiplayer.
         Connect();
     }
+    
+    public void onHelpButtonPress() {
+        SceneManager.LoadScene("Help");
+    }
 
     void Connect()
     {
