@@ -20,5 +20,5 @@ Invisible Plug Game is a game built using Unity. Photon is also used for online 
 
 
 ## Acknowledgements
-3D Outlet Model: https://www.turbosquid.com/3d-models/maya-wall-socket/836657
-3D Plug Model: Provided by Melvin N. Greene
+- 3D Outlet Model: https://www.turbosquid.com/3d-models/maya-wall-socket/836657
+- 3D Plug Model: Provided by Melvin N. Greene
