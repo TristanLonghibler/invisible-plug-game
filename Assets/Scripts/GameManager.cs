@@ -40,6 +40,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     {
         Instance = this;
         plugModel.transform.position = new Vector3(Random.Range(-39, 70), Random.Range(-43, 17), Random.Range(-40, -8)); // Initialize the plug in random location at start
+        plugModel.transform.Rotate(0, 0, Random.Range(0, 360));
 
         //The timer used in the game uses a script that is part of Photon. From the project root directory, the path to the script is Assets/Photon/PhotonUnityNetworking/UtilityScripts/Room/CountdownTimer.cs
         Photon.Pun.UtilityScripts.CountdownTimer timer = timerText.GetComponent<Photon.Pun.UtilityScripts.CountdownTimer>();
