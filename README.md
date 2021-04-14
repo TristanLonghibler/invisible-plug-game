@@ -1,9 +1,6 @@
 # Invisible Plug Game
 
-## Overview
-
 Invisible Plug Game is a game built using Unity. Photon is also used for online multiplayer. The game can only be played over the Internet. 
-
 
 #### Gameplay Instructions
 
